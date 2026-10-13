@@ -47,6 +47,12 @@ app.get("/health", (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
+// Start the server only when this file is run directly.
+// This allows automated tests to import the app without opening a port.
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
